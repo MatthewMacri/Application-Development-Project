@@ -81,28 +81,6 @@ The system will have two types of users: **Customers** and **Admins**.
 - Write unit tests for key methods like `makeReservation()`, `addCar()`, and `isAvailable()`.
 - Ensure the test coverage includes checking for availability conflicts and proper reservation creation.
 
----
-
-## Steps to Follow:
-
-1. **Create UML Diagrams**:
-   - **Class Diagram**: Visualize the relationship between `User`, `Customer`, `Admin`, `Car`, and `Reservation`.
-   - **Activity Diagram**: Show the flow of actions like making a reservation, adding cars, and viewing reservations.
-
-2. **Design the GUI**:
-   - Create wireframes or mockups for the login page, car browsing interface, and admin management dashboard.
-
-3. **Develop Core Classes**:
-   - Start by developing the core classes (`User`, `Car`, `Reservation`) and their methods.
-   - Implement validation checks (e.g., availability checking, input validation for reservations).
-
-4. **Add Internationalization**:
-   - Implement resource bundles for English and French language support.
-
-5. **Develop and Test the Application**:
-   - Follow the Test-Driven Development (TDD) approach by writing tests for your classes and methods as you develop the system.
-   - Deploy the system, ensure it meets the project's requirements, and test the user workflows.
-
 ### **Created By**
 - Danny Zhou
 - Matthew Macri
