@@ -111,7 +111,6 @@
             Controls.Add(label1);
             Controls.Add(newUserButton);
             Name = "Login";
-            Text = "Login";
             ResumeLayout(false);
             PerformLayout();
         }

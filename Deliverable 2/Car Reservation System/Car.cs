@@ -6,7 +6,38 @@ using System.Threading.Tasks;
 
 namespace Car_Reservation_System
 {
-    internal class Car
+    public class Car
     {
+        public int CarId { get; set; }
+        public string Model { get; set; }
+        public string Brand { get; set; }
+        public string CarType { get; set; }
+        public DateTime AvailableFrom { get; set; }
+        public DateTime AvailableTo { get; set; }
+
+        public Car(int carId, string model, string brand, string carType, DateTime availableFrom, DateTime availableTo)
+        {
+            CarId = carId;
+            Model = model;
+            Brand = brand;
+            CarType = carType;
+            AvailableFrom = availableFrom;
+            AvailableTo = availableTo;
+        }
+        /// <summary>
+        /// If current time is bigger than Available From and current time is smaller than Available To 
+        /// </summary>
+        /// <returns>If car is available or not</returns>
+        public bool isAvailable()
+        {
+            DateTime currentTime = DateTime.Now;
+            return currentTime > AvailableFrom && currentTime < AvailableTo;
+        }
+
+        public void getCarDetails()
+        {
+            Console.WriteLine($"Car Id: {CarId}, Model: {Model}, Brand: {Brand}, Type: {CarType}");
+        }
     }
+    
 }
