@@ -2,6 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace Car_Reservation_System
 {
@@ -21,6 +23,15 @@ namespace Car_Reservation_System
 
         [JsonProperty("ReservationHistory")]
         public List<string> ReservationHistory { get; set; }
+
+        public Customers(string username, string password, string email, int customerID)
+            : base(username, password, email)
+        {
+            Username = username;
+            Password = password;
+            Email = email;
+            CustomerID = customerID;
+        }
 
         public Customers(string username, string password, string email, int customerID, List<string> reservationHistory)
             : base(username, password, email)
