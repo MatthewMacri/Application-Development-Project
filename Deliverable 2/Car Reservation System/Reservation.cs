@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,11 +9,17 @@ namespace Car_Reservation_System
 {
     public class Reservation
     {
+        [JsonProperty("reservationid")]
         public int ReservationId { get; set; }
+        [JsonProperty("car")]
         public Car Car { get; set; }
+        [JsonProperty("customer")]
         public Customers Customer { get; set; }
+        [JsonProperty("reservationstart")]
         public DateTime reservationStart { get; set; }
+        [JsonProperty("reservationend")]
         public DateTime reservationEnd { get; set; }
+        [JsonProperty("status")]
         public string Status { get; set; }
 
         public Reservation(int reservationId, Car car, Customers customer, DateTime reservationStart, DateTime reservationEnd)

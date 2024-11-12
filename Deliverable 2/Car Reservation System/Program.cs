@@ -1,7 +1,10 @@
+using System.Data.SQLite;
+
 namespace Car_Reservation_System
 {
-    internal static class Program
+     class Program
     {
+        
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -12,6 +15,15 @@ namespace Car_Reservation_System
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Login());
+            DatabaseCar databaseCar = new DatabaseCar();
+            
+            using (var connection = databaseCar.GetConnection())
+            {
+                connection.Open();
+                databaseCar.CreateCarTable(connection);
+                databaseCar.CreateReservationTable(connection);
+            }
+
         }
     }
 }

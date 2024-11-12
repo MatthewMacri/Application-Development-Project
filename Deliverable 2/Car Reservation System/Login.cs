@@ -22,5 +22,11 @@ namespace Car_Reservation_System
             CreateUserForm createUserForm = new CreateUserForm();
             createUserForm.ShowDialog();
         }
+
+        private void SubmitButton_Click(object sender, EventArgs e)
+        {
+            CustomerDashboard customerDashboard = new CustomerDashboard();
+            customerDashboard.ShowDialog();
+        }
     }
 }

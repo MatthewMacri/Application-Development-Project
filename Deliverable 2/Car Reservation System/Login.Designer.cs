@@ -97,6 +97,7 @@
             SubmitButton.TabIndex = 6;
             SubmitButton.Text = "Submit";
             SubmitButton.UseVisualStyleBackColor = true;
+            SubmitButton.Click += SubmitButton_Click;
             // 
             // Login
             // 
