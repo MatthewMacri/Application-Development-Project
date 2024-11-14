@@ -21,7 +21,10 @@ namespace Car_Reservation_System
         {
             return new SQLiteConnection(_connecitonString);
         }
-
+        /// <summary>
+        /// Creates a table named Cars using SQLite database connection 
+        /// </summary>
+        /// <param name="connection"></param>
         public void CreateCarTable(SQLiteConnection connection)
         {
                 string createQuery = @"
@@ -39,7 +42,10 @@ namespace Car_Reservation_System
                     command.ExecuteNonQuery();
                 }
         }
-        
+        /// <summary>
+        /// Inserts a Car into Cars Table in SQLite
+        /// </summary>
+        /// <param name="car"></param>
         public void InsertCar(Car car)
         {
             using (SQLiteConnection connection = GetConnection())
@@ -61,7 +67,10 @@ namespace Car_Reservation_System
                 }
             }
         }
-
+        /// <summary>
+        /// Get All Cars from the Cars Table returns it in a List
+        /// </summary>
+        /// <returns>A List of Cars</returns>
         public List<Car> GetAllCars()
         {
             List<Car> cars = new List<Car>();
@@ -89,7 +98,10 @@ namespace Car_Reservation_System
             }
             return cars;
         }
-
+        /// <summary>
+        /// Creates a table named Reservations using SQLite database connection 
+        /// </summary>
+        /// <param name="connection"></param>
         public void CreateReservationTable(SQLiteConnection connection)
         {
             string createQuery = @"CREATE TABLE Reservations (
@@ -107,6 +119,10 @@ namespace Car_Reservation_System
                 command.ExecuteNonQuery();
             }
         }
+        /// <summary>
+        /// Inserts a reservation inside of Reservation table
+        /// </summary>
+        /// <param name="reservation"></param>
         public void InsertReservation(Reservation reservation)
         {
             using(SQLiteConnection connection = GetConnection())
@@ -129,5 +145,49 @@ namespace Car_Reservation_System
                 }
             }
         }
+        /// <summary>
+        /// Creates a table named Users using SQLite database connection 
+        /// </summary>
+        /// <param name="connection"></param>
+        public void CreateUserTable(SQLiteConnection connection) 
+        {
+            string createQuery = @"
+            CREATE TABLE Users (
+            UserId INTEGER,
+            Username TEXT NOT NULL UNIQUE,
+            Password TEXT NOT NULL,
+            Email TEXT NOT NULL UNIQUE
+            )
+            ";
+            using (SQLiteCommand command = new SQLiteCommand(@createQuery, connection))
+            {
+                command.ExecuteNonQuery();
+            }
+        }
+        /// <summary>
+        /// Inserts a User inside of Users Table
+        /// </summary>
+        /// <param name="user"></param>
+        public void InsertUser(User user)
+        {
+            using (SQLiteConnection connection = GetConnection())
+            {
+                connection.Open();
+
+                string insertQuery = @" INSERT INTO Users (UserId, Username, Password, Email)
+                                        VALUES (@UserId, @Username, @Password, @Email)
+                                        ";
+                using (SQLiteCommand command = new SQLiteCommand(insertQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@Username", user.GetUsername);
+                    command.Parameters.AddWithValue("@Password", user.GetPassword);
+                    command.Parameters.AddWithValue("@Email", user.GetEmail);
+                    
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
     }
 }

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -13,6 +14,10 @@ namespace Car_Reservation_System
         private string _password { get; set; }
         private string _email { get; set; }
         public static User LoggedInUser { get; private set; }
+
+        public string GetUsername() => _username;
+        public string GetPassword() => _password;
+        public string GetEmail() => _email;
 
         /// <summary>
         /// This login method would take the input of the username and password and check if the user exists in the database.

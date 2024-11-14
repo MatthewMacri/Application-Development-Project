@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Data.SqlClient;
+using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -37,14 +38,15 @@ namespace Car_Reservation_System
                 MessageBox.Show("Please enter both ID and Password.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+            DatabaseCar databasecar = new DatabaseCar();
 
             // Check credentials in the database
-            using (SqlConnection connection = new SqlConnection(connectionString))
+            using (SQLiteConnection connection = databasecar.GetConnection())
             {
                 connection.Open();
                 string query = "SELECT COUNT(1) FROM Users WHERE UserId = @UserId AND Password = @Password";
 
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using (SQLiteCommand command = new SQLiteCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@UserId", userId);
                     command.Parameters.AddWithValue("@Password", password);
