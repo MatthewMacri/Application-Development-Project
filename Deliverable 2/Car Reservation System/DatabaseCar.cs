@@ -1,50 +1,83 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data.SQLite;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Car_Reservation_System
 {
     public class DatabaseCar
     {
-        private string _connecitonString;
+        private string _connectionString;
 
+        /// <summary>
+        /// Initializes a new instance of the DatabaseCar class.
+        /// Sets the SQLite connection string to point to the Data.db file.
+        /// </summary>
         public DatabaseCar()
         {
-            _connecitonString = @"Data Source=..\..\..\Data.db;Version=3;";
+            _connectionString = $"Data Source={AppDomain.CurrentDomain.BaseDirectory}Data.db;Version=3;";
         }
+
+        /// <summary>
+        /// Creates and returns a new SQLiteConnection using the specified connection string.
+        /// </summary>
+        /// <returns>A new SQLiteConnection object.</returns>
         public SQLiteConnection GetConnection()
         {
-            return new SQLiteConnection(_connecitonString);
+            return new SQLiteConnection(_connectionString);
         }
 
+        /// <summary>
+        /// Creates the Users table if it does not already exist.
+        /// </summary>
+        /// <param name="connection">An open SQLiteConnection to the database.</param>
+        public void CreateUsersTable(SQLiteConnection connection)
+        {
+            string createQuery = @"
+            CREATE TABLE IF NOT EXISTS Users (
+                UserId TEXT PRIMARY KEY,
+                Password TEXT NOT NULL
+            )";
+
+            using (SQLiteCommand command = new SQLiteCommand(createQuery, connection))
+            {
+                command.ExecuteNonQuery();
+            }
+        }
+
+        /// <summary>
+        /// Creates the Cars table if it does not already exist.
+        /// </summary>
+        /// <param name="connection">An open SQLiteConnection to the database.</param>
         public void CreateCarTable(SQLiteConnection connection)
         {
-                string createQuery = @"
-                    CREATE TABLE Cars (
-                        CarId INTEGER PRIMARY KEY,
-                        Model TEXT,
-                        Brand TEXT,
-                        CarType TEXT,
-                        AvailableFrom DATETIME,
-                        AvailableTo DATETIME
-                    )";
+            string createQuery = @"
+                CREATE TABLE IF NOT EXISTS Cars (
+                    CarId INTEGER PRIMARY KEY,
+                    Model TEXT,
+                    Brand TEXT,
+                    CarType TEXT,
+                    AvailableFrom DATETIME,
+                    AvailableTo DATETIME
+                )";
 
-                using (SQLiteCommand command = new SQLiteCommand(createQuery, connection))
-                {
-                    command.ExecuteNonQuery();
-                }
+            using (SQLiteCommand command = new SQLiteCommand(createQuery, connection))
+            {
+                command.ExecuteNonQuery();
+            }
         }
-        
+
+        /// <summary>
+        /// Inserts a new car record into the Cars table.
+        /// Ensures that the Cars table exists before attempting to insert.
+        /// </summary>
+        /// <param name="car">The Car object containing car details to be inserted.</param>
         public void InsertCar(Car car)
         {
             using (SQLiteConnection connection = GetConnection())
             {
                 connection.Open();
+                CreateCarTable(connection); // Ensure table exists
 
                 string insertQuery = @"INSERT INTO Cars (CarId, Model, Brand, CarType, AvailableFrom, AvailableTo) 
                     VALUES (@CarId, @Model, @Brand, @CarType, @AvailableFrom, @AvailableTo)";
@@ -62,6 +95,10 @@ namespace Car_Reservation_System
             }
         }
 
+        /// <summary>
+        /// Retrieves all car records from the Cars table and returns them as a list of Car objects.
+        /// </summary>
+        /// <returns>A list of Car objects representing all cars in the Cars table.</returns>
         public List<Car> GetAllCars()
         {
             List<Car> cars = new List<Car>();
@@ -77,12 +114,13 @@ namespace Car_Reservation_System
                         while (reader.Read())
                         {
                             cars.Add(new Car(
-                                reader.GetInt32(0), //CarID
-                                reader.GetString(1), //Model
-                                reader.GetString(2), //Brand
-                                reader.GetString(3), //CarType
-                                reader.GetDateTime(4), //Available From
-                                reader.GetDateTime(5))); //Available To
+                                reader.GetInt32(0), // CarId
+                                reader.GetString(1), // Model
+                                reader.GetString(2), // Brand
+                                reader.GetString(3), // CarType
+                                reader.GetDateTime(4), // AvailableFrom
+                                reader.GetDateTime(5)  // AvailableTo
+                            ));
                         }
                     }
                 }
@@ -90,32 +128,43 @@ namespace Car_Reservation_System
             return cars;
         }
 
+        /// <summary>
+        /// Creates the Reservations table if it does not already exist.
+        /// </summary>
+        /// <param name="connection">An open SQLiteConnection to the database.</param>
         public void CreateReservationTable(SQLiteConnection connection)
         {
-            string createQuery = @"CREATE TABLE Reservations (
-                                   ReservationId INTEGER PRIMARY KEY,
-                                   CarId INTEGER,
-                                   CustomerId INTEGER,
-                                   ReservationStart DATETIME,
-                                   ReservationEnd DATETIME,
-                                   Status TEXT,
-                                   FOREIGN KEY (CarId) REFERENCES Cars(CarId)
-                                   )";
+            string createQuery = @"
+                CREATE TABLE IF NOT EXISTS Reservations (
+                    ReservationId INTEGER PRIMARY KEY,
+                    CarId INTEGER,
+                    CustomerId INTEGER,
+                    ReservationStart DATETIME,
+                    ReservationEnd DATETIME,
+                    Status TEXT,
+                    FOREIGN KEY (CarId) REFERENCES Cars(CarId)
+                )";
 
-            using (SQLiteCommand command = new SQLiteCommand(createQuery, connection)) 
+            using (SQLiteCommand command = new SQLiteCommand(createQuery, connection))
             {
                 command.ExecuteNonQuery();
             }
         }
+
+        /// <summary>
+        /// Inserts a new reservation record into the Reservations table.
+        /// Ensures that the Reservations table exists before attempting to insert.
+        /// </summary>
+        /// <param name="reservation">The Reservation object containing reservation details to be inserted.</param>
         public void InsertReservation(Reservation reservation)
         {
-            using(SQLiteConnection connection = GetConnection())
+            using (SQLiteConnection connection = GetConnection())
             {
                 connection.Open();
+                CreateReservationTable(connection); // Ensure table exists
 
-                string insertQuery = @" INSERT INTO Reservations (ReservationId, CarId, CustomerId, ReservationStart, ReservationEnd, Status)
-                                        VALUES (@ReservationId, @CarId, @CustomerId, @ReservationStart, @ReservationEnd, @Status)
-                                        ";
+                string insertQuery = @"INSERT INTO Reservations (ReservationId, CarId, CustomerId, ReservationStart, ReservationEnd, Status)
+                                       VALUES (@ReservationId, @CarId, @CustomerId, @ReservationStart, @ReservationEnd, @Status)";
                 using (SQLiteCommand command = new SQLiteCommand(insertQuery, connection))
                 {
                     command.Parameters.AddWithValue("@ReservationId", reservation.ReservationId);
