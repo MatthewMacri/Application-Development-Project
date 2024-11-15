@@ -117,7 +117,6 @@
             passwordTextBox.PasswordChar = '*';
             passwordTextBox.Size = new Size(100, 23);
             passwordTextBox.TabIndex = 8;
-            passwordTextBox.TextChanged += passwordTextBox_TextChanged;
             // 
             // CreateUserForm
             // 

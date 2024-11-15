@@ -15,7 +15,7 @@ namespace Car_Reservation_System
 {
     public partial class CreateUserForm : Form
     {
-        private DatabaseCar databaseCar;
+        private Database database;
 
         /// <summary>
         /// Initializes a new instance of the CreateUserForm.
@@ -24,7 +24,7 @@ namespace Car_Reservation_System
         public CreateUserForm()
         {
             InitializeComponent();
-            databaseCar = new DatabaseCar();
+            database = new Database();
         }
 
         /// <summary>
@@ -35,46 +35,46 @@ namespace Car_Reservation_System
         /// <param name="e">Event data.</param>
         private void submitButton_Click(object sender, EventArgs e)
         {
-            string firstName = firstNameTextBox.Text;
-            string lastName = secondNameTB.Text;
-            string password = passwordTextBox.Text;
+                int counter = 0;
+                string firstName = firstNameTextBox.Text;
+                string lastName = secondNameTB.Text;
+                string password = passwordTextBox.Text;
 
-            // Check if any of the fields are empty
-            if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(password))
-            {
-                MessageBox.Show("Please fill in all fields.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-
-            // Generate a unique user ID (e.g., by combining first and last names or using a GUID)
-            string userId = firstName.ToLower() + "." + lastName.ToLower();
-
-            try
-            {
-                // Establish connection to the SQLite database
-                using (SQLiteConnection connection = databaseCar.GetConnection())
+                // Check if any of the fields are empty
+                if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(password))
                 {
-                    connection.Open();
-                    databaseCar.CreateUsersTable(connection); // Ensure Users table exists
+                    MessageBox.Show("Please fill in all fields.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                int userId = randomUserId();
+                MessageBox.Show("User Id: " + userId);
 
-                    // Insert the new user into the Users table
-                    string insertQuery = "INSERT INTO Users (UserId, Password) VALUES (@UserId, @Password)";
-                    using (SQLiteCommand command = new SQLiteCommand(insertQuery, connection))
+                try
+                {
+                    // Establish connection to the SQLite database
+                    using (SQLiteConnection connection = database.GetConnection())
                     {
-                        command.Parameters.AddWithValue("@UserId", userId);
-                        command.Parameters.AddWithValue("@Password", password);
+                        connection.Open();
+                        database.CreateUsersTable(connection); // Ensure Users table exists
 
-                        command.ExecuteNonQuery();
-                        MessageBox.Show("User created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Close(); // Close the form after successful creation
+                        // Insert the new user into the Users table
+                        string insertQuery = "INSERT INTO Users (UserId, Password) VALUES (@UserId, @Password)";
+                        using (SQLiteCommand command = new SQLiteCommand(insertQuery, connection))
+                        {
+                            command.Parameters.AddWithValue("@UserId", userId);
+                            command.Parameters.AddWithValue("@Password", password);
+
+                            command.ExecuteNonQuery();
+                            MessageBox.Show("User created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            this.Close(); // Close the form after successful creation
+                        }
                     }
                 }
-            }
-            catch (Exception ex)
-            {
-                // Handle and display any database-related errors
-                MessageBox.Show("An error occurred: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+                catch (Exception ex)
+                {
+                    // Handle and display any database-related errors
+                    MessageBox.Show("An error occurred: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
         }
 
         /// <summary>
@@ -86,17 +86,6 @@ namespace Car_Reservation_System
         {
             Random random = new Random();
             return random.Next(1000, 9999);
-        }
-
-        /// <summary>
-        /// Event handler for text changes in the password field.
-        /// Currently not implemented but available for password validation or feedback if needed.
-        /// </summary>
-        /// <param name="sender">The object that triggered the event.</param>
-        /// <param name="e">Event data.</param>
-        private void passwordTextBox_TextChanged(object sender, EventArgs e)
-        {
-            // Optional: Add any logic for password validation or feedback here
         }
     }
 }
