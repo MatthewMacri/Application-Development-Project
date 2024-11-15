@@ -27,14 +27,13 @@ namespace Car_Reservation_System
         /// </summary>
         public static void initDatabase()
         {
-            DatabaseCar databaseCar = new DatabaseCar();
+            Database databaseCar = new Database();
 
             using (var connection = databaseCar.GetConnection())
             {
                 connection.Open();
                 //databaseCar.CreateCarTable(connection);
                 //databaseCar.CreateReservationTable(connection);
-                databaseCar.CreateUserTable(connection);
             }
         }
         /// <summary>
@@ -42,7 +41,7 @@ namespace Car_Reservation_System
         /// </summary>
         public static void DropTable()
         {
-            DatabaseCar databaseCar = new DatabaseCar();
+            Database databaseCar = new Database();
             using (SQLiteConnection connection = databaseCar.GetConnection())
             {
                 connection.Open();

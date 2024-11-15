@@ -5,7 +5,7 @@ using System.Windows.Forms;
 
 namespace Car_Reservation_System
 {
-    public class DatabaseCar
+    public class Database
     {
         private string _connectionString;
 
@@ -13,7 +13,7 @@ namespace Car_Reservation_System
         /// Initializes a new instance of the DatabaseCar class.
         /// Sets the SQLite connection string to point to the Data.db file.
         /// </summary>
-        public DatabaseCar()
+        public Database()
         {
             _connectionString = $"Data Source={AppDomain.CurrentDomain.BaseDirectory}Data.db;Version=3;";
         }
@@ -27,23 +27,7 @@ namespace Car_Reservation_System
             return new SQLiteConnection(_connectionString);
         }
 
-        /// <summary>
-        /// Creates the Users table if it does not already exist.
-        /// </summary>
-        /// <param name="connection">An open SQLiteConnection to the database.</param>
-        public void CreateUsersTable(SQLiteConnection connection)
-        {
-            string createQuery = @"
-            CREATE TABLE IF NOT EXISTS Users (
-                UserId TEXT PRIMARY KEY,
-                Password TEXT NOT NULL
-            )";
-
-            using (SQLiteCommand command = new SQLiteCommand(createQuery, connection))
-            {
-                command.ExecuteNonQuery();
-            }
-        }
+        //Cars 
 
         /// <summary>
         /// Creates the Cars table if it does not already exist.
@@ -173,6 +157,53 @@ namespace Car_Reservation_System
                     command.Parameters.AddWithValue("@ReservationStart", reservation.reservationStart);
                     command.Parameters.AddWithValue("@ReservationEnd", reservation.reservationEnd);
                     command.Parameters.AddWithValue("@Status", reservation.Status);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+
+        //Users 
+
+        /// <summary>
+        /// Creates the Users table if it does not already exist.
+        /// </summary>
+        /// <param name="connection">An open SQLiteConnection to the database.</param>
+        public void CreateUsersTable(SQLiteConnection connection)
+        {
+            string createQuery = @"
+            CREATE TABLE IF NOT EXISTS Users (
+                UserId INTEGER PRIMARY KEY AUTOINCREMENT,
+                Username TEXT NOT NULL UNIQUE,
+                Password TEXT NOT NULL,
+                Email TEXT NOT NULL UNIQUE
+            )";
+
+            using (SQLiteCommand command = new SQLiteCommand(createQuery, connection))
+            {
+                command.ExecuteNonQuery();
+            }
+        }
+
+        /// <summary>
+        /// Inserts a new user record into the Users table.
+        /// Ensures that the Users table exists before attempting to insert.
+        /// </summary>
+        /// <param name="user">The User object containing user details to be inserted.</param>
+        public void InsertUser(User user)
+        {
+            using (SQLiteConnection connection = GetConnection())
+            {
+                connection.Open();
+                CreateUsersTable(connection); // Ensure table exists
+
+                string insertQuery = @"INSERT INTO Users (Username, Password, Email)
+                                       VALUES (@Username, @Password, @Email)";
+                using (SQLiteCommand command = new SQLiteCommand(insertQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@Username", user.GetUsername());
+                    command.Parameters.AddWithValue("@Password", user.GetPassword());
+                    command.Parameters.AddWithValue("@Email", user.GetEmail());
 
                     command.ExecuteNonQuery();
                 }
