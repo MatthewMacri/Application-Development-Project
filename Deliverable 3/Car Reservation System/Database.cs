@@ -174,9 +174,9 @@ namespace Car_Reservation_System
             string createQuery = @"
             CREATE TABLE IF NOT EXISTS Users (
                 UserId INTEGER PRIMARY KEY AUTOINCREMENT,
-                Username TEXT NOT NULL UNIQUE,
+                Username TEXT,
                 Password TEXT NOT NULL,
-                Email TEXT NOT NULL UNIQUE
+                Email TEXT
             )";
 
             using (SQLiteCommand command = new SQLiteCommand(createQuery, connection))

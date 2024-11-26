@@ -58,10 +58,11 @@ namespace Car_Reservation_System
                         database.CreateUsersTable(connection); // Ensure Users table exists
 
                         // Insert the new user into the Users table
-                        string insertQuery = "INSERT INTO Users (UserId, Password) VALUES (@UserId, @Password)";
+                        string insertQuery = "INSERT INTO Users (UserId, Username, Password) VALUES (@UserId, @UserId, @Password)";
                         using (SQLiteCommand command = new SQLiteCommand(insertQuery, connection))
                         {
                             command.Parameters.AddWithValue("@UserId", userId);
+                            command.Parameters.AddWithValue("@Username", userId);
                             command.Parameters.AddWithValue("@Password", password);
 
                             command.ExecuteNonQuery();
