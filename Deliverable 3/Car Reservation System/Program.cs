@@ -14,8 +14,8 @@ namespace Car_Reservation_System
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
 
-            initDatabase(); //Commented initDatabase() method because the Tables are initialized
-            //DropTable();
+            initDatabase();
+            //DropTable(); //Drop table if needed
 
             ApplicationConfiguration.Initialize();
             Application.Run(new Login());
