@@ -200,7 +200,7 @@ namespace Car_Reservation_System.ClassFiles
             Username TEXT,
             Password TEXT NOT NULL,
             Email TEXT,
-            Role TEXT
+            Role TEXT NOT NULL
         )";
 
             using (SQLiteCommand command = new SQLiteCommand(createQuery, connection))
