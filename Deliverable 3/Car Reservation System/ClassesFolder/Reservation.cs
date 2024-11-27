@@ -1,11 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using Car_Reservation_System.ClassesFolder;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Car_Reservation_System
+namespace Car_Reservation_System.ClassFiles
 {
     public class Reservation
     {

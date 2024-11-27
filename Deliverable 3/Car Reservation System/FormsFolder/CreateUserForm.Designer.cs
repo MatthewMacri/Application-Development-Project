@@ -2,15 +2,22 @@
 {
     partial class CreateUserForm
     {
-        /// <summary>
-        /// Required designer variable.
-        /// </summary>
         private System.ComponentModel.IContainer components = null;
+        private Label creatingUserLabel;
+        private Label firstNameLabel;
+        private Label lastNameLabel;
+        private TextBox firstNameTextBox;
+        private TextBox secondNameTB;
+        private Button submitButton;
+        private Label userIdLabel;
+        private Label passwordLabel;
+        private TextBox passwordTextBox;
+        private ComboBox roleComboBox; // ComboBox for Role Selection
+        private Label roleLabel;
 
         /// <summary>
         /// Clean up any resources being used.
         /// </summary>
-        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null))
@@ -22,10 +29,6 @@
 
         #region Windows Form Designer generated code
 
-        /// <summary>
-        /// Required method for Designer support - do not modify
-        /// the contents of this method with the code editor.
-        /// </summary>
         private void InitializeComponent()
         {
             creatingUserLabel = new Label();
@@ -37,6 +40,9 @@
             userIdLabel = new Label();
             passwordLabel = new Label();
             passwordTextBox = new TextBox();
+            roleComboBox = new ComboBox(); // Role selection ComboBox
+            roleLabel = new Label();
+
             SuspendLayout();
             // 
             // creatingUserLabel
@@ -81,25 +87,21 @@
             secondNameTB.Size = new Size(100, 23);
             secondNameTB.TabIndex = 4;
             // 
-            // submitButton
+            // roleLabel
             // 
-            submitButton.Location = new Point(631, 379);
-            submitButton.Name = "submitButton";
-            submitButton.Size = new Size(108, 23);
-            submitButton.TabIndex = 5;
-            submitButton.Text = "Submit";
-            submitButton.UseVisualStyleBackColor = true;
-            submitButton.Click += submitButton_Click;
+            roleLabel.AutoSize = true;
+            roleLabel.Location = new Point(280, 260);
+            roleLabel.Name = "roleLabel";
+            roleLabel.Size = new Size(37, 15);
+            roleLabel.TabIndex = 9;
+            roleLabel.Text = "Role :";
             // 
-            // userIdLabel
+            // roleComboBox
             // 
-            userIdLabel.AutoSize = true;
-            userIdLabel.Enabled = false;
-            userIdLabel.Location = new Point(354, 275);
-            userIdLabel.Name = "userIdLabel";
-            userIdLabel.Size = new Size(0, 15);
-            userIdLabel.TabIndex = 6;
-            userIdLabel.Visible = false;
+            roleComboBox.Location = new Point(419, 257);
+            roleComboBox.Name = "roleComboBox";
+            roleComboBox.Size = new Size(121, 23);
+            roleComboBox.TabIndex = 10;
             // 
             // passwordLabel
             // 
@@ -118,11 +120,23 @@
             passwordTextBox.Size = new Size(100, 23);
             passwordTextBox.TabIndex = 8;
             // 
+            // submitButton
+            // 
+            submitButton.Location = new Point(631, 379);
+            submitButton.Name = "submitButton";
+            submitButton.Size = new Size(108, 23);
+            submitButton.TabIndex = 5;
+            submitButton.Text = "Submit";
+            submitButton.UseVisualStyleBackColor = true;
+            submitButton.Click += submitButton_Click;
+            // 
             // CreateUserForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(roleComboBox);
+            Controls.Add(roleLabel);
             Controls.Add(passwordTextBox);
             Controls.Add(passwordLabel);
             Controls.Add(userIdLabel);
@@ -139,15 +153,5 @@
         }
 
         #endregion
-
-        private Label creatingUserLabel;
-        private Label firstNameLabel;
-        private Label lastNameLabel;
-        private TextBox firstNameTextBox;
-        private TextBox secondNameTB;
-        private Button submitButton;
-        private Label userIdLabel;
-        private Label passwordLabel;
-        private TextBox passwordTextBox;
     }
 }
