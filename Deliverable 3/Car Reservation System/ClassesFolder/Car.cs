@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Car_Reservation_System
+namespace Car_Reservation_System.ClassFiles
 {
     public class Car
     {
@@ -46,5 +46,5 @@ namespace Car_Reservation_System
             Console.WriteLine($"Car Id: {CarId}, Model: {Model}, Brand: {Brand}, Type: {CarType}");
         }
     }
-    
+
 }

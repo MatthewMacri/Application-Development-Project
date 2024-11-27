@@ -1,6 +1,6 @@
 using System.Data.SQLite;
 
-namespace Car_Reservation_System
+namespace Car_Reservation_System.ClassFiles
 {
     class Program
     {
@@ -21,7 +21,7 @@ namespace Car_Reservation_System
             Application.Run(new Login());
 
         }
-    
+
         /// <summary>
         /// Initializes the Database Tables
         /// </summary>
@@ -51,7 +51,7 @@ namespace Car_Reservation_System
 
                 using (SQLiteCommand command = new SQLiteCommand(dropTableQuery, connection))
                 {
-                    command.ExecuteNonQuery();  
+                    command.ExecuteNonQuery();
                 }
             }
         }
@@ -59,5 +59,5 @@ namespace Car_Reservation_System
     }
 }
 
-    
-    
+
+

@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace Car_Reservation_System
+namespace Car_Reservation_System.ClassesFolder
 {
     public class Customers : User
     {
@@ -87,11 +87,11 @@ namespace Car_Reservation_System
             var existingCustomer = customers.Find(c => c.CustomerID == CustomerID);
             if (existingCustomer != null)
             {
-                existingCustomer.ReservationHistory = new List<string>(ReservationHistory); 
+                existingCustomer.ReservationHistory = new List<string>(ReservationHistory);
             }
             else
             {
-                customers.Add(this);  
+                customers.Add(this);
             }
 
             string updatedJson = JsonConvert.SerializeObject(customers, Formatting.Indented);

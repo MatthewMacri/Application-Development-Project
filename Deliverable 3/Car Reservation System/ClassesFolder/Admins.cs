@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Car_Reservation_System
+namespace Car_Reservation_System.ClassFiles
 {
     public class Admins : User
     {
@@ -125,7 +125,7 @@ namespace Car_Reservation_System
             {
                 connection.Open();
                 string deleteQuery = "DELETE FROM Cars WHERE CarId = @CarId";
-                using (var command = new System.Data.SQLite.SQLiteCommand(deleteQuery, connection))
+                using (var command = new SQLiteCommand(deleteQuery, connection))
                 {
                     command.Parameters.AddWithValue("@CarId", carId);
                     command.ExecuteNonQuery();
@@ -147,7 +147,7 @@ namespace Car_Reservation_System
             {
                 connection.Open();
                 string selectQuery = "SELECT * FROM Reservations";
-                using (var command = new System.Data.SQLite.SQLiteCommand(selectQuery, connection))
+                using (var command = new SQLiteCommand(selectQuery, connection))
                 {
                     using (var reader = command.ExecuteReader())
                     {
@@ -178,7 +178,7 @@ namespace Car_Reservation_System
                 {
                     connection.Open();
                     string updateQuery = "UPDATE Reservations SET Status = @Status WHERE ReservationId = @ReservationId";
-                    using (var command = new System.Data.SQLite.SQLiteCommand(updateQuery, connection))
+                    using (var command = new SQLiteCommand(updateQuery, connection))
                     {
                         command.Parameters.AddWithValue("@Status", newStatus);
                         command.Parameters.AddWithValue("@ReservationId", reservationId);
