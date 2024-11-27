@@ -38,26 +38,5 @@ namespace Car_Reservation_System
                 : "en";
             SetLanguage(selectedLanguage);
             ApplyTranslations();
-        }
-    }
-    //private void AddCarButton_Click(object sender, EventArgs e)
-    //    {
-    //        MessageBox.Show("Add Car functionality not implemented yet.");
-    //    }
-
-    //    private void UpdateCarButton_Click(object sender, EventArgs e)
-    //    {
-    //        MessageBox.Show("Update Car functionality not implemented yet.");
-    //    }
-
-    //    private void RemoveCarButton_Click(object sender, EventArgs e)
-    //    {
-    //        MessageBox.Show("Remove Car functionality not implemented yet.");
-    //    }
-
-    //    private void ManageReservationsButton_Click(object sender, EventArgs e)
-    //    {
-    //        MessageBox.Show("Manage Reservations functionality not implemented yet.");
-    //    }
-    //}
+}
 }

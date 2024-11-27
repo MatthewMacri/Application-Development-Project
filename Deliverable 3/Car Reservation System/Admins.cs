@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SQLite;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -51,14 +52,13 @@ namespace Car_Reservation_System
         /// <summary>
         /// Updates details of an existing car in the database.
         /// </summary>
-        public static void updateCar()
+        public void updateCar()
         {
+            Database db = new Database();
             Console.Write("Enter Car ID to update: ");
             int carId = int.Parse(Console.ReadLine());
 
-            Database db = new Database();
             List<Car> cars = db.GetAllCars();
-
             Car carToUpdate = cars.FirstOrDefault(car => car.CarId == carId);
             if (carToUpdate == null)
             {
@@ -84,7 +84,23 @@ namespace Car_Reservation_System
             if (!string.IsNullOrEmpty(newAvailableFrom)) carToUpdate.AvailableFrom = DateTime.Parse(newAvailableFrom);
             if (!string.IsNullOrEmpty(newAvailableTo)) carToUpdate.AvailableTo = DateTime.Parse(newAvailableTo);
 
-            db.InsertCar(carToUpdate);
+            using (var connection = db.GetConnection())
+            {
+                connection.Open();
+                string updateQuery = @"UPDATE Cars SET Model = @Model, Brand = @Brand, CarType = @CarType, 
+                      AvailableFrom = @AvailableFrom, AvailableTo = @AvailableTo WHERE CarId = @CarId";
+                using (var command = new SQLiteCommand(updateQuery, connection))
+                {
+                    command.Parameters.AddWithValue("@Model", carToUpdate.Model);
+                    command.Parameters.AddWithValue("@Brand", carToUpdate.Brand);
+                    command.Parameters.AddWithValue("@CarType", carToUpdate.CarType);
+                    command.Parameters.AddWithValue("@AvailableFrom", carToUpdate.AvailableFrom);
+                    command.Parameters.AddWithValue("@AvailableTo", carToUpdate.AvailableTo);
+                    command.Parameters.AddWithValue("@CarId", carToUpdate.CarId);
+                    command.ExecuteNonQuery();
+                }
+            }
+
             Console.WriteLine("Car details updated successfully!");
         }
 
