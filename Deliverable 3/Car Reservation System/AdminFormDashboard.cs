@@ -39,7 +39,7 @@ namespace Car_Reservation_System
             SetLanguage(selectedLanguage);
             ApplyTranslations();
         }
-    }
+    
     private void AddCarButton_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Add Car functionality not implemented yet.");

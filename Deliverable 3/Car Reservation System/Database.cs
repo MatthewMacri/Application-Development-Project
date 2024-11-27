@@ -15,8 +15,9 @@ namespace Car_Reservation_System
         /// </summary>
         public Database()
         {
-            _connectionString = $"Data Source={AppDomain.CurrentDomain.BaseDirectory}Data.db;Version=3;";
+            _connectionString = $"Data Source={Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Data.db")};Version=3;";
         }
+
 
         /// <summary>
         /// Creates and returns a new SQLiteConnection using the specified connection string.

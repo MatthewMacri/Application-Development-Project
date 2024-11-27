@@ -28,12 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.carListBox = new System.Windows.Forms.ListBox();
-            this.addCarButton = new System.Windows.Forms.Button();
-            this.updateCarButton = new System.Windows.Forms.Button();
-            this.removeCarButton = new System.Windows.Forms.Button();
-            this.manageReservationsButton = new System.Windows.Forms.Button();
-            this.SuspendLayout();
+            this.addCarButton.Click += new System.EventHandler(this.AddCarButton_Click);
+            this.updateCarButton.Click += new System.EventHandler(this.UpdateCarButton_Click);
+            this.removeCarButton.Click += new System.EventHandler(this.RemoveCarButton_Click);
+            this.manageReservationsButton.Click += new System.EventHandler(this.ManageReservationsButton_Click);
+            this.ResumeLayout(false);
             // 
             // carListBox
             // 
