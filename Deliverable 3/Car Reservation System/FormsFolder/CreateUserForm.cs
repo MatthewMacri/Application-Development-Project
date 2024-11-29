@@ -40,25 +40,30 @@ namespace Car_Reservation_System
         /// </summary>
         private void SubmitButton_Click(object sender, EventArgs e)
         {
+            // Gather input from text fields and combo box
             string firstName = firstNameTextBox.Text;
             string lastName = lastNameTextBox.Text;
             string password = passwordTextBox.Text;
             string role = roleComboBox.SelectedItem?.ToString();
 
+            // Validate input fields
             if (string.IsNullOrEmpty(firstName) || string.IsNullOrEmpty(lastName) || string.IsNullOrEmpty(password) || string.IsNullOrEmpty(role))
             {
                 MessageBox.Show("Please fill in all fields.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            int userId = RandomUserId();
+            // Generate a random User ID
+            int userId = new Random().Next(1000, 9999);
+
             try
             {
                 using (SQLiteConnection connection = database.GetConnection())
                 {
                     connection.Open();
-                    database.CreateUsersTable(connection);
+                    database.CreateUsersTable(connection); // Ensure the Users table exists
 
+                    // Insert the new user into the database
                     string insertQuery = "INSERT INTO Users (UserId, Username, Password, Role) VALUES (@UserId, @Username, @Password, @Role)";
                     using (SQLiteCommand command = new SQLiteCommand(insertQuery, connection))
                     {
@@ -68,16 +73,22 @@ namespace Car_Reservation_System
                         command.Parameters.AddWithValue("@Role", role);
 
                         command.ExecuteNonQuery();
-                        MessageBox.Show("User created successfully!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Close();
                     }
                 }
+
+                // Display the generated User ID
+                MessageBox.Show($"User created successfully! Your ID is: {userId}", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // Optionally clear the form or close it
+                this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show("An error occurred: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // Handle database errors
+                MessageBox.Show($"An error occurred while creating the user: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
+
 
         /// <summary>
         /// Generates a random integer to be used as a user ID, within the range 1000 to 9999.

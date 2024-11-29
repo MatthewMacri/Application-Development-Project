@@ -1,18 +1,20 @@
 ﻿using System;
+using System.Data.SQLite;
 using System.Windows.Forms;
+using Car_Reservation_System.ClassFiles;
 
 namespace Car_Reservation_System
 {
     public partial class Login : Form
     {
+        private Database database;
         public Login()
         {
             InitializeComponent();
 
-            // Subscribe to the LanguageManager's event
             LanguageManager.LanguageChanged += UpdateLanguage;
+            database = new Database();
 
-            // Initialize the form with the current language
             UpdateLanguage();
         }
 
@@ -45,9 +47,67 @@ namespace Car_Reservation_System
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            // Handle submit logic (e.g., user authentication)
-            MessageBox.Show("Submit button clicked! Implement authentication logic here.");
+            // Get user input from text fields
+            string userId = idTextBox.Text; // TextBox for user ID
+            string password = passwordTextBox.Text; // TextBox for password
+
+            // Validate input fields
+            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(password))
+            {
+                MessageBox.Show("Please enter both User ID and Password.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
+            try
+            {
+                using (SQLiteConnection connection = database.GetConnection())
+                {
+                    connection.Open();
+
+                    // Query to check user credentials
+                    string query = "SELECT Role FROM Users WHERE UserId = @UserId AND Password = @Password";
+                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@UserId", userId);
+                        command.Parameters.AddWithValue("@Password", password);
+
+                        object result = command.ExecuteScalar();
+
+                        if (result != null)
+                        {
+                            string role = result.ToString();
+
+                            // Open the appropriate dashboard based on the role
+                            if (role == "Admin")
+                            {
+                                AdminFormDashboard adminDashboard = new AdminFormDashboard();
+                                adminDashboard.Show();
+                                this.Hide();
+                            }
+                            else if (role == "Customer")
+                            {
+                                CustomerDashboard customerDashboard = new CustomerDashboard();
+                                customerDashboard.Show();
+                                this.Hide();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Unknown role. Please contact support.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("Invalid User ID or Password. Please try again.", "Authentication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"An error occurred: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
+
 
         private void newUserButton_Click(object sender, EventArgs e)
         {
