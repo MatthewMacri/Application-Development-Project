@@ -120,6 +120,12 @@
   <data name="CreatingUserLabel" xml:space="preserve">
     <value>Création d'un utilisateur</value>
   </data>
+  <data name="CreatingUserLabel2" xml:space="preserve">
+    <value>Création d'un utilisateur</value>
+  </data>
+  <data name="CreatingUserLabel1" xml:space="preserve">
+    <value>Création d'un utilisateur</value>
+  </data>
   <data name="FirstNameLabel" xml:space="preserve">
     <value>Prénom :</value>
   </data>
@@ -167,5 +173,11 @@
   </data>
   <data name="ToLabel" xml:space="preserve">
     <value>À :</value>
+  </data>
+  <data name="LastNameLabel" xml:space="preserve">
+    <value>Nom de famille: </value>
+  </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>Annuler</value>
   </data>
 </root>

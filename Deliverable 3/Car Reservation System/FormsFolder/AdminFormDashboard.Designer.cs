@@ -2,6 +2,9 @@
 {
     partial class AdminFormDashboard
     {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
@@ -19,96 +22,81 @@
 
         #region Windows Form Designer generated code
 
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
         private void InitializeComponent()
         {
-            carListBox = new ListBox();
-            addCarButton = new Button();
-            updateCarButton = new Button();
-            removeCarButton = new Button();
-            manageReservationsButton = new Button();
-            SuspendLayout();
-
+            this.addCarButton.Click += new System.EventHandler(this.AddCarButton_Click);
+            this.updateCarButton.Click += new System.EventHandler(this.UpdateCarButton_Click);
+            this.removeCarButton.Click += new System.EventHandler(this.RemoveCarButton_Click);
+            this.manageReservationsButton.Click += new System.EventHandler(this.ManageReservationsButton_Click);
+            this.ResumeLayout(false);
             // 
             // carListBox
             // 
-            carListBox.FormattingEnabled = true;
-            carListBox.ItemHeight = 15;
-            carListBox.Location = new Point(12, 12);
-            carListBox.Name = "carListBox";
-            carListBox.Size = new Size(400, 400);
-            carListBox.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            carListBox.TabIndex = 0;
-
+            this.carListBox.FormattingEnabled = true;
+            this.carListBox.Location = new System.Drawing.Point(12, 12);
+            this.carListBox.Name = "carListBox";
+            this.carListBox.Size = new System.Drawing.Size(350, 259);
+            this.carListBox.TabIndex = 0;
             // 
             // addCarButton
             // 
-            addCarButton.Location = new Point(430, 20);
-            addCarButton.Name = "addCarButton";
-            addCarButton.Size = new Size(120, 30);
-            addCarButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            addCarButton.TabIndex = 1;
-            addCarButton.Text = "Add Car";
-            addCarButton.UseVisualStyleBackColor = true;
-            addCarButton.Click += AddCarButton_Click;
-
+            this.addCarButton.Location = new System.Drawing.Point(390, 12);
+            this.addCarButton.Name = "addCarButton";
+            this.addCarButton.Size = new System.Drawing.Size(120, 23);
+            this.addCarButton.TabIndex = 1;
+            this.addCarButton.Text = "Add Car";
+            this.addCarButton.UseVisualStyleBackColor = true;
             // 
             // updateCarButton
             // 
-            updateCarButton.Location = new Point(430, 60);
-            updateCarButton.Name = "updateCarButton";
-            updateCarButton.Size = new Size(120, 30);
-            updateCarButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            updateCarButton.TabIndex = 2;
-            updateCarButton.Text = "Update Car";
-            updateCarButton.UseVisualStyleBackColor = true;
-            updateCarButton.Click += UpdateCarButton_Click;
-
+            this.updateCarButton.Location = new System.Drawing.Point(390, 51);
+            this.updateCarButton.Name = "updateCarButton";
+            this.updateCarButton.Size = new System.Drawing.Size(120, 23);
+            this.updateCarButton.TabIndex = 2;
+            this.updateCarButton.Text = "Update Car";
+            this.updateCarButton.UseVisualStyleBackColor = true;
             // 
             // removeCarButton
             // 
-            removeCarButton.Location = new Point(430, 100);
-            removeCarButton.Name = "removeCarButton";
-            removeCarButton.Size = new Size(120, 30);
-            removeCarButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            removeCarButton.TabIndex = 3;
-            removeCarButton.Text = "Remove Car";
-            removeCarButton.UseVisualStyleBackColor = true;
-            removeCarButton.Click += RemoveCarButton_Click;
-
+            this.removeCarButton.Location = new System.Drawing.Point(390, 90);
+            this.removeCarButton.Name = "removeCarButton";
+            this.removeCarButton.Size = new System.Drawing.Size(120, 23);
+            this.removeCarButton.TabIndex = 3;
+            this.removeCarButton.Text = "Remove Car";
+            this.removeCarButton.UseVisualStyleBackColor = true;
             // 
             // manageReservationsButton
             // 
-            manageReservationsButton.Location = new Point(430, 140);
-            manageReservationsButton.Name = "manageReservationsButton";
-            manageReservationsButton.Size = new Size(120, 30);
-            manageReservationsButton.Anchor = AnchorStyles.Top | AnchorStyles.Right;
-            manageReservationsButton.TabIndex = 4;
-            manageReservationsButton.Text = "Manage Reservations";
-            manageReservationsButton.UseVisualStyleBackColor = true;
-            manageReservationsButton.Click += ManageReservationsButton_Click;
-
+            this.manageReservationsButton.Location = new System.Drawing.Point(390, 139);
+            this.manageReservationsButton.Name = "manageReservationsButton";
+            this.manageReservationsButton.Size = new System.Drawing.Size(120, 23);
+            this.manageReservationsButton.TabIndex = 4;
+            this.manageReservationsButton.Text = "Manage Reservations";
+            this.manageReservationsButton.UseVisualStyleBackColor = true;
             // 
             // AdminFormDashboard
             // 
-            AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(600, 450);
-            Controls.Add(carListBox);
-            Controls.Add(addCarButton);
-            Controls.Add(updateCarButton);
-            Controls.Add(removeCarButton);
-            Controls.Add(manageReservationsButton);
-            Name = "AdminFormDashboard";
-            Text = "Admin Dashboard";
-            ResumeLayout(false);
+            this.ClientSize = new System.Drawing.Size(534, 291);
+            this.Controls.Add(this.manageReservationsButton);
+            this.Controls.Add(this.removeCarButton);
+            this.Controls.Add(this.updateCarButton);
+            this.Controls.Add(this.addCarButton);
+            this.Controls.Add(this.carListBox);
+            this.Name = "AdminFormDashboard";
+            this.Text = "Admin Dashboard";
+            this.ResumeLayout(false);
         }
 
         #endregion
 
-        private ListBox carListBox;
-        private Button addCarButton;
-        private Button updateCarButton;
-        private Button removeCarButton;
-        private Button manageReservationsButton;
+        private System.Windows.Forms.ListBox carListBox;
+        private System.Windows.Forms.Button addCarButton;
+        private System.Windows.Forms.Button updateCarButton;
+        private System.Windows.Forms.Button removeCarButton;
+        private System.Windows.Forms.Button manageReservationsButton;
     }
 }
