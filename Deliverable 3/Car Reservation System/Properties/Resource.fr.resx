@@ -180,4 +180,7 @@
   <data name="CancelButton" xml:space="preserve">
     <value>Annuler</value>
   </data>
+  <data name="CarNameLabel" xml:space="preserve">
+    <value>Nom de la voiture :</value>
+  </data>
 </root>
