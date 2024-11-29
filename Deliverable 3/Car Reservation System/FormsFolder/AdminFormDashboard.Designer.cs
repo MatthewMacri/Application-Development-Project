@@ -28,11 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.addCarButton.Click += new System.EventHandler(this.AddCarButton_Click);
-            this.updateCarButton.Click += new System.EventHandler(this.UpdateCarButton_Click);
-            this.removeCarButton.Click += new System.EventHandler(this.RemoveCarButton_Click);
-            this.manageReservationsButton.Click += new System.EventHandler(this.ManageReservationsButton_Click);
-            this.ResumeLayout(false);
+            this.carListBox = new System.Windows.Forms.ListBox();
+            this.addCarButton = new System.Windows.Forms.Button();
+            this.updateCarButton = new System.Windows.Forms.Button();
+            this.removeCarButton = new System.Windows.Forms.Button();
+            this.manageReservationsButton = new System.Windows.Forms.Button();
+
             // 
             // carListBox
             // 
@@ -41,6 +42,7 @@
             this.carListBox.Name = "carListBox";
             this.carListBox.Size = new System.Drawing.Size(350, 259);
             this.carListBox.TabIndex = 0;
+
             // 
             // addCarButton
             // 
@@ -50,6 +52,8 @@
             this.addCarButton.TabIndex = 1;
             this.addCarButton.Text = "Add Car";
             this.addCarButton.UseVisualStyleBackColor = true;
+            this.addCarButton.Click += new System.EventHandler(this.AddCarButton_Click);
+
             // 
             // updateCarButton
             // 
@@ -59,6 +63,8 @@
             this.updateCarButton.TabIndex = 2;
             this.updateCarButton.Text = "Update Car";
             this.updateCarButton.UseVisualStyleBackColor = true;
+            this.updateCarButton.Click += new System.EventHandler(this.UpdateCarButton_Click);
+
             // 
             // removeCarButton
             // 
@@ -68,6 +74,8 @@
             this.removeCarButton.TabIndex = 3;
             this.removeCarButton.Text = "Remove Car";
             this.removeCarButton.UseVisualStyleBackColor = true;
+            this.removeCarButton.Click += new System.EventHandler(this.RemoveCarButton_Click);
+
             // 
             // manageReservationsButton
             // 
@@ -77,6 +85,8 @@
             this.manageReservationsButton.TabIndex = 4;
             this.manageReservationsButton.Text = "Manage Reservations";
             this.manageReservationsButton.UseVisualStyleBackColor = true;
+            this.manageReservationsButton.Click += new System.EventHandler(this.ManageReservationsButton_Click);
+
             // 
             // AdminFormDashboard
             // 
@@ -88,6 +98,7 @@
             this.Controls.Add(this.carListBox);
             this.Name = "AdminFormDashboard";
             this.Text = "Admin Dashboard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.ResumeLayout(false);
         }
 
