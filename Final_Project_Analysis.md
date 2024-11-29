@@ -101,3 +101,5 @@ The main objectives were to:
 
 ### Team Collaboration:
 - Practiced effective communication and task delegation using Git for version control.
+
+By: Danny Zhou & Matthew Macri
