@@ -35,6 +35,7 @@
             passwordTextBox = new TextBox();
             label3 = new Label();
             SubmitButton = new Button();
+            button1 = new Button();
             SuspendLayout();
             // 
             // newUserButton
@@ -99,11 +100,22 @@
             SubmitButton.UseVisualStyleBackColor = true;
             SubmitButton.Click += SubmitButton_Click;
             // 
+            // button1
+            // 
+            button1.Location = new Point(684, 28);
+            button1.Name = "button1";
+            button1.Size = new Size(75, 23);
+            button1.TabIndex = 7;
+            button1.Text = "French";
+            button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(button1);
             Controls.Add(SubmitButton);
             Controls.Add(label3);
             Controls.Add(passwordTextBox);
@@ -125,5 +137,6 @@
         private TextBox passwordTextBox;
         private Label label3;
         private Button SubmitButton;
+        private Button button1;
     }
 }

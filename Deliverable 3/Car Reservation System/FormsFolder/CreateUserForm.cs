@@ -2,14 +2,9 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Data.SQLite;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Car_Reservation_System
@@ -27,20 +22,26 @@ namespace Car_Reservation_System
             InitializeComponent();
             database = new Database();
 
+            // Subscribe to the LanguageManager's event
+            LanguageManager.LanguageChanged += UpdateLanguage;
+
             // Populate the roleComboBox with options
             roleComboBox.Items.Add("Admin");
             roleComboBox.Items.Add("Customer");
             roleComboBox.SelectedIndex = 0; // Default to "Customer"
+
+            // Set the initial language
+            UpdateLanguage();
         }
 
         /// <summary>
         /// Handles the creation of a new user when the Submit button is clicked.
         /// Validates inputs, generates a unique user ID, and inserts the new user into the Users table.
         /// </summary>
-        private void submitButton_Click(object sender, EventArgs e)
+        private void SubmitButton_Click(object sender, EventArgs e)
         {
             string firstName = firstNameTextBox.Text;
-            string lastName = secondNameTB.Text;
+            string lastName = lastNameTextBox.Text;
             string password = passwordTextBox.Text;
             string role = roleComboBox.SelectedItem?.ToString();
 
@@ -50,7 +51,7 @@ namespace Car_Reservation_System
                 return;
             }
 
-            int userId = randomUserId();
+            int userId = RandomUserId();
             try
             {
                 using (SQLiteConnection connection = database.GetConnection())
@@ -80,12 +81,51 @@ namespace Car_Reservation_System
 
         /// <summary>
         /// Generates a random integer to be used as a user ID, within the range 1000 to 9999.
-        /// This method can be used for unique ID generation if required.
         /// </summary>
-        private int randomUserId()
+        private int RandomUserId()
         {
             Random random = new Random();
             return random.Next(1000, 9999);
+        }
+
+        /// <summary>
+        /// Updates the form's language based on the current culture.
+        /// </summary>
+        private void UpdateLanguage()
+        {
+            // Load the resource manager and current culture
+            var rm = Car_Reservation_System.Properties.Resource.ResourceManager;
+            var culture = LanguageManager.CurrentCulture;
+
+            // Debug logging
+            Console.WriteLine($"Culture: {culture.Name}");
+            Console.WriteLine($"LastNameLabel Text: {rm.GetString("LastNameLabel", culture)}");
+
+            // Update UI components with localized text
+            creatingUserLabel.Text = rm.GetString("CreatingUserLabel", culture);
+            firstNameLabel.Text = rm.GetString("FirstNameLabel", culture);
+            lastNameLabel.Text = rm.GetString("LastNameLabel", culture) ?? "Last Name :"; // Fallback if null
+            passwordLabel.Text = rm.GetString("PasswordLabel", culture);
+            roleLabel.Text = rm.GetString("RoleLabel", culture);
+            submitButton.Text = rm.GetString("SubmitButton", culture);
+            cancelButton.Text = rm.GetString("CancelButton", culture);
+        }
+
+        /// <summary>
+        /// Unsubscribes from the LanguageManager event to prevent memory leaks.
+        /// </summary>
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            LanguageManager.LanguageChanged -= UpdateLanguage;
+            base.OnFormClosed(e);
+        }
+
+        /// <summary>
+        /// Handles the Cancel button click event. Closes the form without saving.
+        /// </summary>
+        private void CancelButton_Click(object sender, EventArgs e)
+        {
+            this.Close(); // Simply close the form
         }
     }
 }

@@ -1,84 +1,66 @@
-﻿using Car_Reservation_System.ClassFiles;
-using System;
-using System.Data.Entity;
-using System.Data.SQLite;
+﻿using System;
 using System.Windows.Forms;
 
 namespace Car_Reservation_System
 {
     public partial class Login : Form
     {
-        private string connectionString = "Data Source=Data.db;Version=3;";
-
         public Login()
         {
             InitializeComponent();
+
+            // Subscribe to the LanguageManager's event
+            LanguageManager.LanguageChanged += UpdateLanguage;
+
+            // Initialize the form with the current language
+            UpdateLanguage();
         }
 
-        private void newUserButton_Click(object sender, EventArgs e)
+        private void UpdateLanguage()
         {
-            CreateUserForm createUserForm = new CreateUserForm();
-            createUserForm.ShowDialog();
+            // Load the resource manager and current culture
+            var rm = Car_Reservation_System.Properties.Resource.ResourceManager;
+            var culture = LanguageManager.CurrentCulture;
+
+            // Update UI components with localized text
+            label1.Text = rm.GetString("LoginScreenLabel", culture);
+            label2.Text = rm.GetString("IdLabel", culture);
+            label3.Text = rm.GetString("PasswordLabel", culture);
+            button1.Text = culture.Name == "fr-FR" ? "Anglais" : "French";
+
+            if (SubmitButton != null)
+                SubmitButton.Text = rm.GetString("SubmitButton", culture);
+
+            if (newUserButton != null)
+                newUserButton.Text = rm.GetString("NewUserButton", culture);
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Toggle language
+            LanguageManager.CurrentCulture = LanguageManager.CurrentCulture.Name == "en-US"
+                ? new System.Globalization.CultureInfo("fr-FR")
+                : new System.Globalization.CultureInfo("en-US");
         }
 
         private void SubmitButton_Click(object sender, EventArgs e)
         {
-            string userId = idTextBox.Text;
-            string password = passwordTextBox.Text;
+            // Handle submit logic (e.g., user authentication)
+            MessageBox.Show("Submit button clicked! Implement authentication logic here.");
+        }
 
-            if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(password))
-            {
-                MessageBox.Show("Please enter both ID and Password.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
+        private void newUserButton_Click(object sender, EventArgs e)
+        {
+            // Open the CreateUserForm dialog
+            CreateUserForm createUserForm = new CreateUserForm();
+            createUserForm.ShowDialog();
+        }
 
-            try
-            {
-                using (SQLiteConnection connection = new SQLiteConnection(connectionString))
-                {
-                    connection.Open();
-
-                    // Check user role in the database
-                    string query = "SELECT Role FROM Users WHERE UserId = @UserId AND Password = @Password";
-
-                    using (SQLiteCommand command = new SQLiteCommand(query, connection))
-                    {
-                        command.Parameters.AddWithValue("@UserId", userId);
-                        command.Parameters.AddWithValue("@Password", password);
-
-                        object roleObj = command.ExecuteScalar();
-
-                        if (roleObj != null)
-                        {
-                            string role = roleObj.ToString();
-                            if (role == "admin")
-                            {
-                                // Open Admin Dashboard
-                                AdminFormDashboard adminDashboard = new AdminFormDashboard();
-                                adminDashboard.ShowDialog();
-                            }
-                            else if (role == "customer")
-                            {
-                                // Open Customer Dashboard
-                                CustomerDashboard customerDashboard = new CustomerDashboard();
-                                customerDashboard.ShowDialog();
-                            }
-                            else
-                            {
-                                MessageBox.Show("Invalid user role.", "Authentication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("User does not exist or incorrect password.", "Authentication Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("An error occurred: " + ex.Message, "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
+        protected override void OnFormClosed(FormClosedEventArgs e)
+        {
+            // Unsubscribe from the LanguageManager's event to prevent memory leaks
+            LanguageManager.LanguageChanged -= UpdateLanguage;
+            base.OnFormClosed(e);
         }
     }
 }
