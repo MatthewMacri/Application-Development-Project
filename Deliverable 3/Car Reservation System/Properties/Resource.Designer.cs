@@ -88,11 +88,47 @@ namespace Car_Reservation_System.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        internal static string CancelButton {
+            get {
+                return ResourceManager.GetString("CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Car Name:.
+        /// </summary>
+        internal static string CarNameLabel {
+            get {
+                return ResourceManager.GetString("CarNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Creating User.
         /// </summary>
         internal static string CreatingUserLabel {
             get {
                 return ResourceManager.GetString("CreatingUserLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating User.
+        /// </summary>
+        internal static string CreatingUserLabel1 {
+            get {
+                return ResourceManager.GetString("CreatingUserLabel1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating User.
+        /// </summary>
+        internal static string CreatingUserLabel2 {
+            get {
+                return ResourceManager.GetString("CreatingUserLabel2", resourceCulture);
             }
         }
         
@@ -129,6 +165,15 @@ namespace Car_Reservation_System.Properties {
         internal static string IdLabel {
             get {
                 return ResourceManager.GetString("IdLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last Name: .
+        /// </summary>
+        internal static string LastNameLabel {
+            get {
+                return ResourceManager.GetString("LastNameLabel", resourceCulture);
             }
         }
         
