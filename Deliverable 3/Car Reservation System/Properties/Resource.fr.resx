@@ -183,4 +183,70 @@
   <data name="AddCarTitle" xml:space="preserve">
     <value>Ajouter une voiture</value>
   </data>
+  <data name="SaveButton" xml:space="preserve">
+    <value>Enregistrer</value>
+  </data>
+  <data name="InputError" xml:space="preserve">
+    <value>Veuillez entrer des détails valides. </value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Erreur</value>
+  </data>
+  <data name="SuccessTitle" xml:space="preserve">
+    <value>Succès</value>
+  </data>
+  <data name="SwitchToFrench" xml:space="preserve">
+    <value>Passer au français ?</value>
+  </data>
+  <data name="ChangeLanguageTitle" xml:space="preserve">
+    <value>Changer de langue</value>
+  </data>
+  <data name="CarNameLabel" xml:space="preserve">
+    <value>Nom de la voiture</value>
+  </data>
+  <data name="AddCar" xml:space="preserve">
+    <value>Ajouter une voiture</value>
+  </data>
+  <data name="UpdateCar" xml:space="preserve">
+    <value>Mettre à jour la voiture</value>
+  </data>
+  <data name="RemoveCar" xml:space="preserve">
+    <value>Supprimer la voiture</value>
+  </data>
+  <data name="ManageReservations" xml:space="preserve">
+    <value>Gérer les réservations</value>
+  </data>
+  <data name="CarRemovedSuccess" xml:space="preserve">
+    <value>Voiture '{0}' supprimée avec succès.</value>
+  </data>
+  <data name="CarUpdatedSuccess" xml:space="preserve">
+    <value>Voiture '{0}' mise à jour avec succès.</value>
+  </data>
+  <data name="SelectCarToUpdate" xml:space="preserve">
+    <value>Veuillez sélectionner une voiture à mettre à jour.</value>
+  </data>
+  <data name="SelectCarToRemove" xml:space="preserve">
+    <value>Veuillez sélectionner une voiture à supprimer.</value>
+  </data>
+  <data name="ConfirmRemoveCar" xml:space="preserve">
+    <value>Êtes-vous sûr de vouloir supprimer {0}?</value>
+  </data>
+  <data name="ConfirmTitle" xml:space="preserve">
+    <value>Confirmer la suppression</value>
+  </data>
+  <data name="CustomerDashboardTitle" xml:space="preserve">
+    <value>Tableau de bord client</value>
+  </data>
+  <data name="ManageReservationsTitle" xml:space="preserve">
+    <value>Gérer les réservations</value>
+  </data>
+  <data name="ReservationLabel" xml:space="preserve">
+    <value>Détails de la réservation:</value>
+  </data>
+  <data name="DatabaseError" xml:space="preserve">
+    <value>Une erreur s'est produite : {0}</value>
+  </data>
+  <data name="UpdateCarTitle" xml:space="preserve">
+    <value>Mettre à jour la voiture</value>
+  </data>
 </root>

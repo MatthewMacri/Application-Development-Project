@@ -186,4 +186,67 @@
   <data name="SaveButton" xml:space="preserve">
     <value>Save</value>
   </data>
+  <data name="InputError" xml:space="preserve">
+    <value>Please enter valid details.</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="SuccessTitle" xml:space="preserve">
+    <value>Success</value>
+  </data>
+  <data name="SwitchToFrench" xml:space="preserve">
+    <value>Switch to French?</value>
+  </data>
+  <data name="ChangeLanguageTitle" xml:space="preserve">
+    <value>Change Language</value>
+  </data>
+  <data name="CarNameLabel" xml:space="preserve">
+    <value>Car Name:</value>
+  </data>
+  <data name="AddCar" xml:space="preserve">
+    <value>Add Car</value>
+  </data>
+  <data name="UpdateCar" xml:space="preserve">
+    <value>Update Car</value>
+  </data>
+  <data name="RemoveCar" xml:space="preserve">
+    <value>Remove Car</value>
+  </data>
+  <data name="ManageReservations" xml:space="preserve">
+    <value>Manage Reservations</value>
+  </data>
+  <data name="CarRemovedSuccess" xml:space="preserve">
+    <value>Car '{0}' removed successfully.</value>
+  </data>
+  <data name="CarUpdatedSuccess" xml:space="preserve">
+    <value>Car '{0}' updated successfully.</value>
+  </data>
+  <data name="SelectCarToUpdate" xml:space="preserve">
+    <value>Please select a car to update.</value>
+  </data>
+  <data name="SelectCarToRemove" xml:space="preserve">
+    <value>Please select a car to remove.</value>
+  </data>
+  <data name="ConfirmRemoveCar" xml:space="preserve">
+    <value>Are you sure you want to remove {0}?</value>
+  </data>
+  <data name="ConfirmTitle" xml:space="preserve">
+    <value>Confirm Delete</value>
+  </data>
+  <data name="CustomerDashboardTitle" xml:space="preserve">
+    <value>Customer Dashboard</value>
+  </data>
+  <data name="ManageReservationsTitle" xml:space="preserve">
+    <value>Manage Reservations</value>
+  </data>
+  <data name="ReservationLabel" xml:space="preserve">
+    <value>Reservation Details:</value>
+  </data>
+  <data name="DatabaseError" xml:space="preserve">
+    <value>An error occurred: {0}</value>
+  </data>
+  <data name="UpdateCarTitle" xml:space="preserve">
+    <value />
+  </data>
 </root>
