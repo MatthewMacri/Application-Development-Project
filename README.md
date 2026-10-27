@@ -1,86 +1,81 @@
+![Car Reservation System](assets/banner.png)
+
 # Car Reservation System
 
-## Scenario:
-The Car Reservation System allows customers to reserve cars for rental. Users can browse available cars, select the date and time for the rental, and make a reservation. Admins can add, update, or remove cars from the system and manage reservations.
+> A bilingual C# desktop application for renting cars — customers browse, filter, and reserve, while admins manage the fleet and bookings.
 
-## Design Paradigm:
-The system will have two types of users: **Customers** and **Admins**.
+![C#](https://img.shields.io/badge/C%23-239120?logo=c-sharp&logoColor=white)
+![.NET](https://img.shields.io/badge/.NET-512BD4?logo=dotnet&logoColor=white)
+![SQLite](https://img.shields.io/badge/SQLite-003B57?logo=sqlite&logoColor=white)
+![MVC](https://img.shields.io/badge/Pattern-MVC-blue)
+![i18n](https://img.shields.io/badge/i18n-EN%20%2F%20FR-orange)
 
-- **Customers**:
-  - Browse available cars.
-  - Filter cars by type, brand, or availability.
-  - Reserve a car for a specific time period.
-  - View their current and past reservations.
-
-- **Admins**:
-  - Add new cars to the system.
-  - Update or remove existing cars.
-  - View all reservations.
-  - Manage reservation statuses (confirm, cancel, or modify).
-
-## Expected Output:
-- **For Customers**:
-  - Ability to browse and filter cars.
-  - Reserve a car with specific start and end dates.
-  - View a list of current reservations and reservation history.
-- **For Admins**:
-  - Ability to add, update, or remove cars.
-  - View and manage all reservations.
+Team project for **Application Development** at Vanier College — a GUI desktop app built around MVC, a data source, internationalization, and a test-driven workflow.
 
 ---
 
-## Project Features:
+## Overview
 
-### 1. Core Classes:
-- **User** (abstract):
-  - Attributes: `username`, `password`, `email`.
-  - Methods: `login()`, `logout()`, `viewProfile()`.
+The Car Reservation System lets customers reserve rental cars and gives administrators the tools to manage the fleet. It demonstrates object-oriented design with class hierarchies (`User → Customer / Admin`), persistent storage, LINQ data processing, and a GUI that supports **English and French** through internationalization (I18N / L10N).
 
-- **Customer** (extends `User`):
-  - Attributes: `customerId`, `reservationHistory`.
-  - Methods: `makeReservation()`, `viewReservations()`.
+## Features
 
-- **Admin** (extends `User`):
-  - Attributes: `adminId`.
-  - Methods: `addCar()`, `updateCar()`, `removeCar()`, `manageReservations()`.
+### 👤 Customers
+- Browse available cars and filter by type, brand, or availability
+- Reserve a car for a specific date/time range
+- View current and past reservations
 
-- **Car**:
-  - Attributes: `carId`, `model`, `brand`, `carType`, `availableFrom`, `availableTo`.
-  - Methods: `isAvailable()`, `getCarDetails()`.
+### 🛠️ Admins
+- Add, update, or remove cars from the fleet
+- View all reservations across customers
+- Confirm, cancel, or modify reservation statuses
 
-- **Reservation**:
-  - Attributes: `reservationId`, `car`, `customer`, `reservationStart`, `reservationEnd`, `status`.
-  - Methods: `confirmReservation()`, `cancelReservation()`, `viewDetails()`.
+### ⚙️ Under the hood
+- **MVC architecture** separating model, view, and controller
+- **Class hierarchies** — an abstract `User` with `Customer` and `Admin` subclasses
+- **Data source** for persisting cars and reservations
+- **Internationalization** — switchable English / French UI
+- **Collections & LINQ** for filtering and querying data
+- **Unit tests** following a test-driven approach
 
----
+## Tech Stack
 
-### 2. Data Structures:
-- **List<Car>**: To store the list of available cars.
-- **List<Reservation>**: To store all reservations.
-- LINQ can be used to filter cars based on availability, brand, or type.
+| Area | Tools |
+|------|-------|
+| Language | C# |
+| Runtime | .NET |
+| UI | Windows Forms (GUI desktop) |
+| Data | SQLite / file-backed store |
+| Patterns | MVC, OOP class hierarchies |
+| Quality | Unit tests (TDD) |
 
-### 3. GUI Features:
-- **Login Screen**: A login system for both customers and admins.
-- **Customer Dashboard**:
-  - Browse cars with filtering options (brand, type, availability).
-  - View current reservations and past reservation history.
-- **Admin Dashboard**:
-  - Add, update, or remove cars from the system.
-  - View and manage all reservations.
+## Getting Started
 
-### 4. Data Source:
-- Use a **database** (SQLite or any relational DB) to store car information and reservations.
-- **Optional**: File-based storage if a database isn’t needed.
+This is a .NET desktop application — open it in **Visual Studio** (or build with the .NET CLI):
 
-### 5. Internationalization (I18N and L10N):
-- Support for **two languages** (e.g., English and French).
-- Use **ResourceBundle** for storing translated strings.
-- The UI should switch between languages based on user preference.
+```bash
+git clone https://github.com/MatthewMacri/Application-Development-Project.git
+cd Application-Development-Project
 
-### 6. Test-Driven Development (TDD):
-- Write unit tests for key methods like `makeReservation()`, `addCar()`, and `isAvailable()`.
-- Ensure the test coverage includes checking for availability conflicts and proper reservation creation.
+# With the .NET SDK installed:
+dotnet restore
+dotnet build
+dotnet run
+```
 
-### **Created By**
-- Danny Zhou
-- Matthew Macri
+Or open the solution in Visual Studio and press **Run** ▶.
+
+## Project Structure
+
+```
+.
+├── Deliverable 1/           # Project description & UML diagrams
+├── Deliverable 2/           # 50% checkpoint — core classes & data
+├── Deliverable 3/           # Final application & user manual
+├── ProjectDescription.md    # Assignment brief
+└── Final_Project_Analysis.md
+```
+
+## Author
+
+**Matthew Macri** (team project) — [LinkedIn](https://www.linkedin.com/in/m-macri/) · [GitHub](https://github.com/MatthewMacri)
